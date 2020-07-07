@@ -3,6 +3,9 @@ import { ApolloServer } from 'apollo-server';
 import schema from './schema';
 import context from './context';
 
+import { PrismaUserRepository } from '../api/user/repository/prisma/PrismaUserRepository';
+import { UserService } from '../api/user/services/UserService';
+
 const config = {
   schema,
   context,

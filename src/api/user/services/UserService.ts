@@ -1,3 +1,4 @@
+import repository from '../repository/prisma/PrismaUserRepository';
 import { IUserRepository } from '../repository/IUserRepository';
 import { User } from '../domain/User';
 
@@ -24,3 +25,5 @@ interface CreateUserInterface {
   middleName?: string | null;
   lastName?: string | null;
 }
+
+export default new UserService(repository);
