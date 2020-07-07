@@ -1,7 +1,7 @@
 import { uuid } from 'uuidv4';
 
 export class UniqueEntityID {
-  private value: string;
+  private readonly value: string;
 
   constructor(id?: string) {
     this.value = id || uuid();
@@ -9,10 +9,6 @@ export class UniqueEntityID {
 
   equals(id?: UniqueEntityID): boolean {
     if (id === null || id === undefined) {
-      return false;
-    }
-
-    if (!(id instanceof UniqueEntityID)) {
       return false;
     }
 

@@ -16,3 +16,4 @@ Project structure:
 
 TODO: 
 - DI (dependency injection)
+- Error handling

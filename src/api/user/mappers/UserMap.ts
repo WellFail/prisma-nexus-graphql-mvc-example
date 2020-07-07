@@ -21,9 +21,7 @@ export class UserMap {
     return user;
   }
 
-  static toPersistence(
-    user: User,
-  ): PersistenceUser {
+  static toPersistence(user: User): PersistenceUser {
     return {
       id: user.id.toValue(),
       email: user.email,
@@ -34,9 +32,7 @@ export class UserMap {
     };
   }
 
-  static toNexus(
-    user: User,
-  ): NexusGenFieldTypes['User'] {
+  static toNexus(user: User): NexusGenFieldTypes['User'] {
     return {
       id: user.id.toValue(),
       email: user.email,

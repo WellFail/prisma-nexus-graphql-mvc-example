@@ -5,7 +5,7 @@ export abstract class Entity<T> {
 
   public readonly props: T;
 
-  constructor(props: T, id?: UniqueEntityID) {
+  protected constructor(props: T, id?: UniqueEntityID) {
     this.id = id || new UniqueEntityID();
     this.props = props;
   }

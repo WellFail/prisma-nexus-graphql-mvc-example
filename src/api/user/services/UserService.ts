@@ -6,12 +6,8 @@ export class UserService {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  public createUser({
-    email, password, firstName, lastName, middleName,
-  }: CreateUserInterface) {
-    const user = User.create({
-      email, password, firstName, lastName, middleName,
-    });
+  public createUser({ email, password, firstName, lastName, middleName }: CreateUserInterface) {
+    const user = User.create({ email, password, firstName, lastName, middleName });
 
     return this.userRepository.createUser(user);
   }
