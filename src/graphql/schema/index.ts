@@ -22,6 +22,10 @@ export const rawSchema = makeSchema({
     typegen: path.join(__dirname, '../../generated/typings.ts'),
     schema: path.join(__dirname, '../../generated/schema.graphql'),
   },
+  nonNullDefaults: {
+    input: false,
+    output: false,
+  },
 });
 
 export default rawSchema;

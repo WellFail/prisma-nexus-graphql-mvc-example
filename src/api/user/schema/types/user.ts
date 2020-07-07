@@ -5,10 +5,8 @@ export const User = objectType({
   definition(t) {
     t.id('id');
     t.string('email');
-    t.string('name', {
-      resolve: (root) => {
-        return 'hui';
-      },
-    });
+    t.string('firstName');
+    t.string('lastName');
+    t.string('secondName');
   },
 });

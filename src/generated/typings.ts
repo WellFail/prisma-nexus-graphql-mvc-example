@@ -28,8 +28,11 @@ export interface NexusGenRootTypes {
   Mutation: {};
   Query: {};
   User: { // root type
-    email: string; // String!
-    id: string; // ID!
+    email?: string | null; // String
+    firstName?: string | null; // String
+    id?: string | null; // ID
+    lastName?: string | null; // String
+    secondName?: string | null; // String
   }
   String: string;
   Int: number;
@@ -44,16 +47,18 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
-    createUser: NexusGenRootTypes['User']; // User!
+    createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    test: string; // String!
-    users: NexusGenRootTypes['User'][]; // [User!]!
+    test: string | null; // String
+    users: NexusGenRootTypes['User'][] | null; // [User!]
   }
   User: { // field return type
-    email: string; // String!
-    id: string; // ID!
-    name: string; // String!
+    email: string | null; // String
+    firstName: string | null; // String
+    id: string | null; // ID
+    lastName: string | null; // String
+    secondName: string | null; // String
   }
 }
 
