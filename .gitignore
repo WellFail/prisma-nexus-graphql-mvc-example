@@ -1,0 +1,5 @@
+node_modules/
+.env
+prisma/.env
+.idea/
+typescript-nexus-prisma-boilerplate.iml
