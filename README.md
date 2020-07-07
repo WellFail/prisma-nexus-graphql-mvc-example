@@ -13,3 +13,6 @@ Project structure:
 - api.user.repository - User repository layer using `prisma`
 
 - api.user.mappers - Mappers for convert `repo` -> `domain` -> `nexus`
+
+TODO: 
+- DI (dependency injection)
