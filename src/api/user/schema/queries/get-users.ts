@@ -10,7 +10,7 @@ export const UserQuery = extendType({
       resolve: async (_, __, { userService }) => {
         const users = await userService.getUsers();
 
-        return users.map((user) => UserMap.toPersistence(user));
+        return users.map((user) => UserMap.toNexus(user));
       },
     });
     t.string('test', {

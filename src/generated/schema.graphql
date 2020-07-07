@@ -4,7 +4,9 @@
 
 input CreateUserInput {
   email: String!
-  firstName: String!
+  firstName: String
+  lastName: String
+  middleName: String
   password: String!
 }
 
@@ -19,8 +21,6 @@ type Query {
 
 type User {
   email: String
-  firstName: String
   id: ID
-  lastName: String
-  secondName: String
+  name: String
 }

@@ -16,7 +16,9 @@ declare global {
 export interface NexusGenInputs {
   CreateUserInput: { // input type
     email: string; // String!
-    firstName: string; // String!
+    firstName?: string | null; // String
+    lastName?: string | null; // String
+    middleName?: string | null; // String
     password: string; // String!
   }
 }
@@ -29,10 +31,8 @@ export interface NexusGenRootTypes {
   Query: {};
   User: { // root type
     email?: string | null; // String
-    firstName?: string | null; // String
     id?: string | null; // ID
-    lastName?: string | null; // String
-    secondName?: string | null; // String
+    name?: string | null; // String
   }
   String: string;
   Int: number;
@@ -55,10 +55,8 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string | null; // String
-    firstName: string | null; // String
     id: string | null; // ID
-    lastName: string | null; // String
-    secondName: string | null; // String
+    name: string | null; // String
   }
 }
 

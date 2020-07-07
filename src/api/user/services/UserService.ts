@@ -1,5 +1,3 @@
-// import { PrismaUserRepository } from './repository/prisma/PrismaUserRepository';
-
 import { IUserRepository } from '../repository/IUserRepository';
 import { User } from '../domain/User';
 
@@ -8,8 +6,12 @@ export class UserService {
     private readonly userRepository: IUserRepository,
   ) {}
 
-  public createUser({ email, password, firstName }: CreateUserInterface) {
-    const user = User.create({ email, password, firstName });
+  public createUser({
+    email, password, firstName, lastName, middleName,
+  }: CreateUserInterface) {
+    const user = User.create({
+      email, password, firstName, lastName, middleName,
+    });
 
     return this.userRepository.createUser(user);
   }
@@ -22,5 +24,7 @@ export class UserService {
 interface CreateUserInterface {
   email: string;
   password: string;
-  firstName: string;
+  firstName?: string | null;
+  middleName?: string | null;
+  lastName?: string | null;
 }

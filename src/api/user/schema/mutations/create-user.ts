@@ -1,5 +1,5 @@
 import { arg, extendType, inputObjectType } from '@nexus/schema';
-import {UserMap} from "../../mappers/UserMap";
+import { UserMap } from '../../mappers/UserMap';
 
 export const UserMutation = extendType({
   type: 'Mutation',
@@ -10,7 +10,7 @@ export const UserMutation = extendType({
       resolve: async (_, { data }, { userService }) => {
         const user = await userService.createUser(data);
 
-        return UserMap.toPersistence(user);
+        return UserMap.toNexus(user);
       },
     });
   },
@@ -21,6 +21,8 @@ export const CreateUserInput = inputObjectType({
   definition(t) {
     t.string('email', { required: true });
     t.string('password', { required: true });
-    t.string('firstName', { required: true });
+    t.string('firstName');
+    t.string('middleName');
+    t.string('lastName');
   },
 });

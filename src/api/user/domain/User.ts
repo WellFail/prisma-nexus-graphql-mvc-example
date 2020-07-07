@@ -34,6 +34,10 @@ export class User extends Entity<IUserProps> {
     super(props, id);
   }
 
+  getName() {
+    return `${(this.firstName) || ''} ${(this.middleName) || ''} ${(this.lastName) || ''}`.trim();
+  }
+
   public static create(
     props: IUserProps,
     id?: UniqueEntityID,
