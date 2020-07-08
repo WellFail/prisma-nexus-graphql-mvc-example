@@ -1,6 +1,7 @@
 import { arg, extendType, inputObjectType } from '@nexus/schema';
 
 import accountService from '../../../../api/account/services/AccountService';
+
 import { AccountMap } from '../../../../api/account/mappers/AccountMap';
 
 export const CreateAccountMutation = extendType({
