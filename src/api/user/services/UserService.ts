@@ -1,10 +1,16 @@
-import repository from '../repository/prisma/PrismaUserRepository';
+import { Email } from '../../common/Email';
+import { IPassword } from '../../common/auth/IPassword';
+import { BcryptPassword } from '../../common/auth/BcryptPassword';
+
+import { IUserService, CreateUserInterface, SignUpUserInterface } from './IUserService';
 import { IUserRepository } from '../repository/IUserRepository';
-
 import { User } from '../domain/User';
-import { UserRole } from '../domain/UserRole';
+import { AuthPayload } from '../domain/AuthPayload';
 
-export class UserService {
+import repository from '../repository/prisma/PrismaUserRepository';
+
+
+export class UserService implements IUserService {
   constructor(
     private readonly userRepository: IUserRepository,
   ) {}
@@ -18,15 +24,32 @@ export class UserService {
   public async getUsers(): Promise<User[]> {
     return this.userRepository.getAllUsers();
   }
-}
 
-interface CreateUserInterface {
-  email: string;
-  password: string;
-  firstName?: string | null;
-  middleName?: string | null;
-  lastName?: string | null;
-  roles: UserRole[];
+  public async signUpUser({ email, firstName, lastName, password }: SignUpUserInterface): Promise<AuthPayload> {
+    const userEmail = new Email({ email });
+    userEmail.validate();
+
+    const userExists = this.userRepository.getUserByEmail(userEmail.email);
+    if (!userExists) throw new Error('This email is already exist in our system');
+
+    const bcryptPassword: IPassword = new BcryptPassword({ password });
+    const hashedPassword: string = await bcryptPassword.getHashedPassword();
+
+    const user = User.create({
+      firstName,
+      lastName,
+      password: hashedPassword,
+      email: userEmail.email,
+      roles: ['EMPLOYEE'],
+    });
+
+    const createdUser = await this.userRepository.createUser(user);
+
+    return {
+      user: createdUser,
+      token: 'test',
+    };
+  }
 }
 
 export default new UserService(repository);

@@ -14,6 +14,11 @@ enum AccountCurrency {
   USD
 }
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 input CreateUserInput {
   email: String!
   firstName: String
@@ -25,11 +30,19 @@ input CreateUserInput {
 
 type Mutation {
   createUser(data: CreateUserInput!): User
+  signUp(data: SignUpInput!): AuthPayload
 }
 
 type Query {
   accounts: [Account!]
   users: [User!]
+}
+
+input SignUpInput {
+  email: String!
+  firstName: String
+  lastName: String
+  password: String!
 }
 
 type User {

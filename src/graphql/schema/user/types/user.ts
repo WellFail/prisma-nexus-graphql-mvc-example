@@ -1,7 +1,7 @@
 import { enumType, objectType } from '@nexus/schema';
 
 import accountService from '../../../../api/account/services/AccountService';
-import {AccountMap} from "../../../../api/account/mappers/AccountMap";
+import { AccountMap } from '../../../../api/account/mappers/AccountMap';
 
 export const User = objectType({
   name: 'User',
@@ -30,4 +30,12 @@ export const User = objectType({
 export const UserRole = enumType({
   name: 'UserRole',
   members: ['ADMIN', 'EMPLOYEE'],
+});
+
+export const AuthPayload = objectType({
+  name: 'AuthPayload',
+  definition(t) {
+    t.string('token');
+    t.field('user', { type: 'User' });
+  },
 });

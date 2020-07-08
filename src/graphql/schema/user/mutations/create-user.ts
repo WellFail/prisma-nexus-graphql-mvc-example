@@ -3,7 +3,7 @@ import { UserMap } from '../../../../api/user/mappers/UserMap';
 
 import userService from '../../../../api/user/services/UserService';
 
-export const UserMutation = extendType({
+export const CreateUserMutation = extendType({
   type: 'Mutation',
   definition: (t) => {
     t.field('createUser', {

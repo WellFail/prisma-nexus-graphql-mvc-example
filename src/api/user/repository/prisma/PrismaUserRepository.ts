@@ -23,6 +23,13 @@ export class PrismaUserRepository implements IUserRepository {
 
     return UserMap.toDomain(createdUser);
   }
+
+  public async getUserByEmail(email: string): Promise<User | null> {
+    const user = await prisma.user.findOne({ where: { email } });
+    if (!user) return null;
+
+    return UserMap.toDomain(user);
+  }
 }
 
 export default new PrismaUserRepository();

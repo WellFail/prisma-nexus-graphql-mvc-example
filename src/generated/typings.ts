@@ -22,6 +22,12 @@ export interface NexusGenInputs {
     password: string; // String!
     roles: NexusGenEnums['UserRole'][]; // [UserRole!]!
   }
+  SignUpInput: { // input type
+    email: string; // String!
+    firstName?: string | null; // String
+    lastName?: string | null; // String
+    password: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -34,6 +40,10 @@ export interface NexusGenRootTypes {
     currency?: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
     id?: string | null; // ID
     name?: string | null; // String
+  }
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
   Query: {};
@@ -52,6 +62,7 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   CreateUserInput: NexusGenInputs['CreateUserInput'];
+  SignUpInput: NexusGenInputs['SignUpInput'];
   AccountCurrency: NexusGenEnums['AccountCurrency'];
   UserRole: NexusGenEnums['UserRole'];
 }
@@ -62,8 +73,13 @@ export interface NexusGenFieldTypes {
     id: string | null; // ID
     name: string | null; // String
   }
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
+    signUp: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Query: { // field return type
     accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
@@ -83,6 +99,9 @@ export interface NexusGenArgTypes {
     createUser: { // args
       data: NexusGenInputs['CreateUserInput']; // CreateUserInput!
     }
+    signUp: { // args
+      data: NexusGenInputs['SignUpInput']; // SignUpInput!
+    }
   }
 }
 
@@ -91,9 +110,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Account" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "Account" | "AuthPayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "CreateUserInput";
+export type NexusGenInputNames = "CreateUserInput" | "SignUpInput";
 
 export type NexusGenEnumNames = "AccountCurrency" | "UserRole";
 
