@@ -10,15 +10,15 @@ export class AccountService implements IAccountService {
     private readonly accountRepository: IAccountRepository,
   ) {}
 
-  public async getAccounts(): Promise<Account[]> {
+  public getAccounts(): Promise<Account[]> {
     return this.accountRepository.getAccounts();
   }
 
-  public async getUserAccounts({ userId }: IGetUserAccounts): Promise<Account[]> {
+  public getUserAccounts({ userId }: IGetUserAccounts): Promise<Account[]> {
     return this.accountRepository.getAccountsByUser({ userId });
   }
 
-  createUserAccount({ userId, currency, name }: ICreateUserAccount): Promise<Account> {
+  public createUserAccount({ userId, currency, name }: ICreateUserAccount): Promise<Account> {
     return this.accountRepository.createAccount({ userId, currency, name });
   }
 }
