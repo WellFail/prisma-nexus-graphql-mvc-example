@@ -14,6 +14,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CreateAccountInput: { // input type
+    currency: NexusGenEnums['AccountCurrency']; // AccountCurrency!
+    name: string; // String!
+    userId: string; // String!
+  }
   CreateUserInput: { // input type
     email: string; // String!
     firstName?: string | null; // String
@@ -61,6 +66,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  CreateAccountInput: NexusGenInputs['CreateAccountInput'];
   CreateUserInput: NexusGenInputs['CreateUserInput'];
   SignUpInput: NexusGenInputs['SignUpInput'];
   AccountCurrency: NexusGenEnums['AccountCurrency'];
@@ -78,6 +84,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: { // field return type
+    createAccount: NexusGenRootTypes['Account'] | null; // Account
     createUser: NexusGenRootTypes['User'] | null; // User
     signUp: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
@@ -96,6 +103,9 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createAccount: { // args
+      data: NexusGenInputs['CreateAccountInput']; // CreateAccountInput!
+    }
     createUser: { // args
       data: NexusGenInputs['CreateUserInput']; // CreateUserInput!
     }
@@ -112,7 +122,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Account" | "AuthPayload" | "Mutation" | "Query" | "User";
 
-export type NexusGenInputNames = "CreateUserInput" | "SignUpInput";
+export type NexusGenInputNames = "CreateAccountInput" | "CreateUserInput" | "SignUpInput";
 
 export type NexusGenEnumNames = "AccountCurrency" | "UserRole";
 

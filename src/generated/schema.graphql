@@ -19,6 +19,12 @@ type AuthPayload {
   user: User
 }
 
+input CreateAccountInput {
+  currency: AccountCurrency!
+  name: String!
+  userId: String!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String
@@ -29,6 +35,7 @@ input CreateUserInput {
 }
 
 type Mutation {
+  createAccount(data: CreateAccountInput!): Account
   createUser(data: CreateUserInput!): User
   signUp(data: SignUpInput!): AuthPayload
 }

@@ -26,13 +26,13 @@ export class UserService implements IUserService {
   }
 
   public async signUpUser({ email, firstName, lastName, password }: SignUpUserInterface): Promise<AuthPayload> {
-    const userEmail = new Email({ email });
+    const userEmail = Email.create({ email });
     userEmail.validate();
 
     const userExists = this.userRepository.getUserByEmail(userEmail.email);
     if (!userExists) throw new Error('This email is already exist in our system');
 
-    const bcryptPassword: IPassword = new BcryptPassword({ password });
+    const bcryptPassword: IPassword = BcryptPassword.create({ password });
     const hashedPassword: string = await bcryptPassword.getHashedPassword();
 
     const user = User.create({

@@ -20,4 +20,8 @@ export class Email implements IEmailProps {
       throw new Error('Incorrect Email');
     }
   }
+
+  public static create({ email }: IEmailProps) {
+    return new Email({ email });
+  }
 }

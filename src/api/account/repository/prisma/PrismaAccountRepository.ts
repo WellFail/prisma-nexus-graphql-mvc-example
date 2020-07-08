@@ -3,19 +3,31 @@ import prisma from '../../../../prisma-client';
 import { Account } from '../../domain/Account';
 import { AccountMap } from '../../mappers/AccountMap';
 
-import { IAccountRepository, IGetAccountsByUser } from '../IAccountRepository';
+import { IAccountRepository, IGetAccountsByUser, ICreateAccount } from '../IAccountRepository';
 
 export class PrismaAccountRepository implements IAccountRepository {
-  async getAccounts(): Promise<Account[]> {
+  public async getAccounts(): Promise<Account[]> {
     const accounts = await prisma.account.findMany();
 
     return accounts.map((account) => AccountMap.toDomain(account));
   }
 
-  async getAccountsByUser({ userId }: IGetAccountsByUser): Promise<Account[]> {
+  public async getAccountsByUser({ userId }: IGetAccountsByUser): Promise<Account[]> {
     const accounts = await prisma.account.findMany({ where: { userId } });
 
     return accounts.map((account) => AccountMap.toDomain(account));
+  }
+
+  public async createAccount({ userId, name, currency }: ICreateAccount): Promise<Account> {
+    const account = await prisma.account.create({
+      data: {
+        currency,
+        name,
+        user: { connect: { id: userId } },
+      },
+    });
+
+    return AccountMap.toDomain(account);
   }
 }
 

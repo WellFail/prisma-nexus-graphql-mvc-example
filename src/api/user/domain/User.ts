@@ -45,10 +45,7 @@ export class User extends Entity<IUserProps> {
     return `${(this.firstName) || ''} ${(this.middleName) || ''} ${(this.lastName) || ''}`.trim();
   }
 
-  public static create(
-    props: IUserProps,
-    id?: UniqueEntityID,
-  ): User {
+  public static create(props: IUserProps, id?: UniqueEntityID): User {
     const defaultValues: IUserProps = { ...props };
 
     const user = new User(defaultValues, id);
