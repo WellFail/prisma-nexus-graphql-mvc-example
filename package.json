@@ -33,10 +33,10 @@
     "@types/jsonwebtoken": "^8.5.0",
     "apollo-server": "^2.15.1",
     "bcrypt": "^5.0.0",
+    "cuid": "^2.1.8",
     "dotenv": "^8.2.0",
     "graphql": "^15.3.0",
     "isemail": "^3.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "uuidv4": "^6.1.1"
+    "jsonwebtoken": "^8.5.1"
   }
 }

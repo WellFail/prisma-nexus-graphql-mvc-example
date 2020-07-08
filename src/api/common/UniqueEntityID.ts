@@ -1,10 +1,10 @@
-import { uuid } from 'uuidv4';
+import cuid from 'cuid';
 
 export class UniqueEntityID {
   private readonly value: string;
 
   constructor(id?: string) {
-    this.value = id || uuid();
+    this.value = id || cuid();
   }
 
   equals(id?: UniqueEntityID): boolean {

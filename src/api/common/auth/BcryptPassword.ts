@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import { IPassword } from './IPassword';
-import {UniqueEntityID} from "../UniqueEntityID";
 
 interface IBcryptPasswordProps {
   password: string;
