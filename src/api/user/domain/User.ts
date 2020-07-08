@@ -1,15 +1,22 @@
 import { Entity } from '../../common/Entity';
 import { UniqueEntityID } from '../../common/UniqueEntityID';
 
+import { UserRole } from './UserRole';
+
 interface IUserProps {
   email: string;
   password: string,
   firstName?: string | null,
   lastName?: string | null,
   middleName?: string | null,
+  roles: UserRole[],
 }
 
 export class User extends Entity<IUserProps> {
+  get roles(): UserRole[] {
+    return this.props.roles;
+  }
+
   get email(): string {
     return this.props.email;
   }

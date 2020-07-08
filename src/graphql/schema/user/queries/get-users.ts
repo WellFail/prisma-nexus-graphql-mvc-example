@@ -1,6 +1,6 @@
 import { extendType } from '@nexus/schema';
-import { UserMap } from '../../mappers/UserMap';
-import userService from '../../services/UserService';
+import { UserMap } from '../../../../api/user/mappers/UserMap';
+import userService from '../../../../api/user/services/UserService';
 
 export const UserQuery = extendType({
   type: 'Query',
@@ -13,9 +13,6 @@ export const UserQuery = extendType({
 
         return users.map((user) => UserMap.toNexus(user));
       },
-    });
-    t.string('test', {
-      resolve: () => 'test',
     });
   },
 });

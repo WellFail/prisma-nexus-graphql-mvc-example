@@ -2,12 +2,25 @@
 ### Do not make changes to this file directly
 
 
+type Account {
+  currency: AccountCurrency
+  id: ID
+  name: String
+}
+
+enum AccountCurrency {
+  EUR
+  RUB
+  USD
+}
+
 input CreateUserInput {
   email: String!
   firstName: String
   lastName: String
   middleName: String
   password: String!
+  roles: [UserRole!]!
 }
 
 type Mutation {
@@ -15,12 +28,19 @@ type Mutation {
 }
 
 type Query {
-  test: String
+  accounts: [Account!]
   users: [User!]
 }
 
 type User {
+  accounts: [Account!]
   email: String
   id: ID
   name: String
+  roles: [UserRole!]
+}
+
+enum UserRole {
+  ADMIN
+  EMPLOYEE
 }

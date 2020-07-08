@@ -13,8 +13,12 @@ export class PrismaUserRepository implements IUserRepository {
   }
 
   public async createUser(user: User): Promise<User> {
+    const persistenceUser = UserMap.toPersistence(user);
     const createdUser = await prisma.user.create({
-      data: UserMap.toPersistence(user),
+      data: {
+        ...persistenceUser,
+        roles: { set: persistenceUser.roles },
+      },
     });
 
     return UserMap.toDomain(createdUser);

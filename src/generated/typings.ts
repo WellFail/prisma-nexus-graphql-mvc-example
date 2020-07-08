@@ -20,19 +20,28 @@ export interface NexusGenInputs {
     lastName?: string | null; // String
     middleName?: string | null; // String
     password: string; // String!
+    roles: NexusGenEnums['UserRole'][]; // [UserRole!]!
   }
 }
 
 export interface NexusGenEnums {
+  AccountCurrency: "EUR" | "RUB" | "USD"
+  UserRole: "ADMIN" | "EMPLOYEE"
 }
 
 export interface NexusGenRootTypes {
+  Account: { // root type
+    currency?: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
+    id?: string | null; // ID
+    name?: string | null; // String
+  }
   Mutation: {};
   Query: {};
   User: { // root type
     email?: string | null; // String
     id?: string | null; // ID
     name?: string | null; // String
+    roles?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
   }
   String: string;
   Int: number;
@@ -43,20 +52,29 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   CreateUserInput: NexusGenInputs['CreateUserInput'];
+  AccountCurrency: NexusGenEnums['AccountCurrency'];
+  UserRole: NexusGenEnums['UserRole'];
 }
 
 export interface NexusGenFieldTypes {
+  Account: { // field return type
+    currency: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
+    id: string | null; // ID
+    name: string | null; // String
+  }
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    test: string | null; // String
+    accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
     users: NexusGenRootTypes['User'][] | null; // [User!]
   }
   User: { // field return type
+    accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
     email: string | null; // String
     id: string | null; // ID
     name: string | null; // String
+    roles: NexusGenEnums['UserRole'][] | null; // [UserRole!]
   }
 }
 
@@ -73,11 +91,11 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "Account" | "Mutation" | "Query" | "User";
 
 export type NexusGenInputNames = "CreateUserInput";
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "AccountCurrency" | "UserRole";
 
 export type NexusGenInterfaceNames = never;
 

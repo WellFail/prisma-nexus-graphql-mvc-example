@@ -11,7 +11,6 @@ export interface Context extends InitialContext {}
 export default async (
   { req, connection }: { req: IncomingMessage; connection: any },
 ): Promise<InitialContext> => {
-
   const context: InitialContext = {
     request: req,
     user: null,

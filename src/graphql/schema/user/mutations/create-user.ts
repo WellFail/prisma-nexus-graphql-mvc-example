@@ -1,7 +1,7 @@
 import { arg, extendType, inputObjectType } from '@nexus/schema';
-import { UserMap } from '../../mappers/UserMap';
+import { UserMap } from '../../../../api/user/mappers/UserMap';
 
-import userService from '../../services/UserService';
+import userService from '../../../../api/user/services/UserService';
 
 export const UserMutation = extendType({
   type: 'Mutation',
@@ -26,5 +26,10 @@ export const CreateUserInput = inputObjectType({
     t.string('firstName');
     t.string('middleName');
     t.string('lastName');
+    t.field('roles', {
+      type: 'UserRole',
+      required: true,
+      list: true,
+    });
   },
 });

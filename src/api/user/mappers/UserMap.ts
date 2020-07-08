@@ -14,6 +14,7 @@ export class UserMap {
         password: raw.password,
         email: raw.email,
         middleName: raw.middleName,
+        roles: raw.roles,
       },
       new UniqueEntityID(raw.id),
     );
@@ -29,6 +30,7 @@ export class UserMap {
       middleName: user.middleName!,
       firstName: user.firstName!,
       lastName: user.lastName!,
+      roles: user.roles,
     };
   }
 
@@ -37,6 +39,8 @@ export class UserMap {
       id: user.id.toValue(),
       email: user.email,
       name: user.getName(),
+      roles: user.roles,
+      accounts: null,
     };
   }
 }

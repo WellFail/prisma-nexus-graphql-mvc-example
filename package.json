@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/index.ts"
+    "dev": "ts-node-dev src/index.ts",
+    "generate": "yarn -s generate:prisma && yarn -s generate:nexus",
+    "generate:prisma": "npx prisma2 generate",
+    "generate:nexus": "GENERATE_NEXUS=true NODE_ENV=development ts-node --transpile-only src/graphql/schema",
+    "migrate": "prisma2 migrate save --experimental --create-db --name='auto' && prisma2 migrate up --experimental --auto-approve",
+    "migrate:up": "prisma2 migrate up --experimental --create-db --auto-approve"
   },
   "keywords": [],
   "author": "",
