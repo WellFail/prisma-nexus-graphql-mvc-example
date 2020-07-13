@@ -1,25 +1,32 @@
-import prisma from '../../../../prisma-client';
-
+import { inject, injectable } from 'inversify';
 import { Account } from '../../domain/Account';
 import { AccountMap } from '../../mappers/AccountMap';
 
 import { IAccountRepository, IGetAccountsByUser, ICreateAccount } from '../IAccountRepository';
+import { TYPES } from '../../../../types';
+import { PrismaService } from '../../../../prisma-client';
 
+@injectable()
 export class PrismaAccountRepository implements IAccountRepository {
+  constructor(
+    @inject(TYPES.PrismaService) private readonly prisma: PrismaService,
+  ) {
+  }
+
   public async getAccounts(): Promise<Account[]> {
-    const accounts = await prisma.account.findMany();
+    const accounts = await this.prisma.account.findMany();
 
     return accounts.map((account) => AccountMap.toDomain(account));
   }
 
   public async getAccountsByUser({ userId }: IGetAccountsByUser): Promise<Account[]> {
-    const accounts = await prisma.account.findMany({ where: { userId } });
+    const accounts = await this.prisma.account.findMany({ where: { userId } });
 
     return accounts.map((account) => AccountMap.toDomain(account));
   }
 
   public async createAccount({ userId, name, currency }: ICreateAccount): Promise<Account> {
-    const account = await prisma.account.create({
+    const account = await this.prisma.account.create({
       data: {
         currency,
         name,
@@ -30,5 +37,3 @@ export class PrismaAccountRepository implements IAccountRepository {
     return AccountMap.toDomain(account);
   }
 }
-
-export default new PrismaAccountRepository();

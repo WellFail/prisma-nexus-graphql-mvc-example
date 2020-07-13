@@ -1,15 +1,13 @@
 import { arg, extendType, inputObjectType } from '@nexus/schema';
 import { UserMap } from '../../../../api/user/mappers/UserMap';
 
-import userService from '../../../../api/user/services/UserService';
-
 export const CreateUserMutation = extendType({
   type: 'Mutation',
   definition: (t) => {
     t.field('createUser', {
       type: 'User',
       args: { data: arg({ type: CreateUserInput, required: true }) },
-      resolve: async (_, { data }) => {
+      resolve: async (_, { data }, { userService }) => {
         const user = await userService.createUser(data);
 
         return UserMap.toNexus(user);

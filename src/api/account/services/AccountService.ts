@@ -1,13 +1,16 @@
-import repository from '../repository/prisma/PrismaAccountRepository';
+import { inject, injectable } from 'inversify';
 
-import { IAccountRepository } from '../repository/IAccountRepository';
+import { TYPES } from '../../../types';
+
 import { Account } from '../domain/Account';
+import { IAccountRepository } from '../repository/IAccountRepository';
 
 import { IAccountService, IGetUserAccounts, ICreateUserAccount } from './IAccountService';
 
+@injectable()
 export class AccountService implements IAccountService {
   constructor(
-    private readonly accountRepository: IAccountRepository,
+    @inject(TYPES.IAccountRepository) private readonly accountRepository: IAccountRepository,
   ) {}
 
   public getAccounts(): Promise<Account[]> {
@@ -22,5 +25,3 @@ export class AccountService implements IAccountService {
     return this.accountRepository.createAccount({ userId, currency, name });
   }
 }
-
-export default new AccountService(repository);

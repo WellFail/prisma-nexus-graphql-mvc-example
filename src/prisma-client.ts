@@ -1,3 +1,11 @@
 import { PrismaClient } from '@prisma/client';
+import { injectable, decorate, inject } from 'inversify';
 
-export default new PrismaClient({ log: ['query'] });
+decorate(injectable(), PrismaClient);
+
+@injectable()
+export class PrismaService extends PrismaClient {
+  constructor(@inject('PrismaConfig') private config: any) {
+    super(config);
+  }
+}

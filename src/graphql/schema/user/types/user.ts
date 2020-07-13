@@ -1,6 +1,5 @@
 import { enumType, objectType } from '@nexus/schema';
 
-import accountService from '../../../../api/account/services/AccountService';
 import { AccountMap } from '../../../../api/account/mappers/AccountMap';
 
 export const User = objectType({
@@ -16,7 +15,7 @@ export const User = objectType({
     t.field('accounts', {
       type: 'Account',
       list: true,
-      resolve: async ({ id }) => {
+      resolve: async ({ id }, __, { accountService }) => {
         if (!id) return [];
 
         const accounts = await accountService.getUserAccounts({ userId: id });

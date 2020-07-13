@@ -1,3 +1,5 @@
+import { injectable, inject } from 'inversify';
+
 import { Email } from '../../common/Email';
 import { IPassword } from '../../common/auth/IPassword';
 import { BcryptPassword } from '../../common/auth/BcryptPassword';
@@ -6,13 +8,12 @@ import { IUserService, CreateUserInterface, SignUpUserInterface } from './IUserS
 import { IUserRepository } from '../repository/IUserRepository';
 import { User } from '../domain/User';
 import { AuthPayload } from '../domain/AuthPayload';
+import { TYPES } from '../../../types';
 
-import repository from '../repository/prisma/PrismaUserRepository';
-
-
+@injectable()
 export class UserService implements IUserService {
   constructor(
-    private readonly userRepository: IUserRepository,
+    @inject(TYPES.IUserRepository) private readonly userRepository: IUserRepository,
   ) {}
 
   public createUser({ email, password, firstName, lastName, middleName, roles }: CreateUserInterface) {
@@ -51,5 +52,3 @@ export class UserService implements IUserService {
     };
   }
 }
-
-export default new UserService(repository);

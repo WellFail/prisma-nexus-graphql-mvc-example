@@ -1,7 +1,5 @@
 import { arg, extendType, inputObjectType } from '@nexus/schema';
 
-import accountService from '../../../../api/account/services/AccountService';
-
 import { AccountMap } from '../../../../api/account/mappers/AccountMap';
 
 export const CreateAccountMutation = extendType({
@@ -10,7 +8,7 @@ export const CreateAccountMutation = extendType({
     t.field('createAccount', {
       type: 'Account',
       args: { data: arg({ type: CreateAccountInput, required: true }) },
-      resolve: async (_, { data }) => {
+      resolve: async (_, { data }, { accountService }) => {
         const account = await accountService.createUserAccount(data);
 
         return AccountMap.toNexus(account);

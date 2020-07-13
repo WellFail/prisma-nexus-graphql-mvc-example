@@ -1,6 +1,5 @@
 import { extendType, inputObjectType, arg } from '@nexus/schema';
 
-import userService from '../../../../api/user/services/UserService';
 import { UserMap } from '../../../../api/user/mappers/UserMap';
 
 export const SignUpUserMutation = extendType({
@@ -9,7 +8,7 @@ export const SignUpUserMutation = extendType({
     t.field('signUp', {
       type: 'AuthPayload',
       args: { data: arg({ type: SignUpInput, required: true }) },
-      resolve: async (_, { data }) => {
+      resolve: async (_, { data }, { userService }) => {
         const { user, token } = await userService.signUpUser(data);
 
         return {
