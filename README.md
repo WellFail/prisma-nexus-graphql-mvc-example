@@ -17,5 +17,4 @@ Project structure:
 - graphql.schema.user - `Graphql` schema definition using `Nexus`
 
 TODO: 
-- DI (dependency injection)
 - Error handling
