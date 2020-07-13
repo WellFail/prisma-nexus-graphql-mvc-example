@@ -4,11 +4,12 @@ import { Email } from '../../common/Email';
 import { IPassword } from '../../common/auth/IPassword';
 import { BcryptPassword } from '../../common/auth/BcryptPassword';
 
-import { IUserService, CreateUserInterface, SignUpUserInterface } from './IUserService';
 import { IUserRepository } from '../repository/IUserRepository';
 import { User } from '../domain/User';
 import { AuthPayload } from '../domain/AuthPayload';
 import { TYPES } from '../../../types';
+
+import { IUserService, CreateUserInterface, SignUpUserInterface } from './IUserService';
 
 @injectable()
 export class UserService implements IUserService {

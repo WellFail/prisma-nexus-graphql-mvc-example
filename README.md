@@ -18,3 +18,7 @@ Project structure:
 
 TODO: 
 - Error handling
+- Separate user services
+- Filtering
+- Pagination
+- Permissions
