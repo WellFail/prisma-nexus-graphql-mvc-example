@@ -14,7 +14,7 @@ class PrismaTestEnvironment extends NodeEnvironment {
     super(config);
 
     this.schema = `test_${nanoid()}`;
-    this.databaseUrl = `postgres://postgres:postgres@127.0.0.1:5432/postgres?schema=${this.schema}`;
+    this.databaseUrl = `postgres://postgres:postgres@127.0.0.1:5432/postgres?schema=tets${this.schema}`;
     env.config({ path: resolve(__dirname, '../.env') });
 
     if (process.env.DATABASE_URL) {
