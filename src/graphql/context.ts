@@ -4,12 +4,14 @@ import { container } from '../inversify.config';
 import { TYPES } from '../types';
 import { IUserService } from '../api/user/services/IUserService';
 import { IAccountService } from '../api/account/services/IAccountService';
+import { ITransactionService } from '../api/transaction/services/ITransactionService';
 
 export interface InitialContext {
   request: IncomingMessage
   user: User | null,
   userService: IUserService,
   accountService: IAccountService,
+  transactionService: ITransactionService,
 }
 
 export interface Context extends InitialContext {
@@ -21,9 +23,12 @@ export default async (
 ): Promise<InitialContext> => {
   const userService: IUserService = container.get(TYPES.IUserService);
   const accountService: IAccountService = container.get(TYPES.IAccountService);
+  const transactionService: ITransactionService = container.get(TYPES.ITransactionService);
+
   const context: InitialContext = {
     userService,
     accountService,
+    transactionService,
     request: req,
     user: null,
   };

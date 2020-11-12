@@ -37,6 +37,7 @@ export class AccountMap {
       id: account.id.toValue(),
       currency: account.currency,
       name: account.name,
+      transactions: null,
     };
   }
 }

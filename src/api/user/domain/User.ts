@@ -1,3 +1,4 @@
+import { Account } from '../../account/domain/Account';
 import { Entity } from '../../common/Entity';
 import { UniqueEntityID } from '../../common/UniqueEntityID';
 

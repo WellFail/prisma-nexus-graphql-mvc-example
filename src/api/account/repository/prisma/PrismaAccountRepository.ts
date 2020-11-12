@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify';
 import { Account } from '../../domain/Account';
 import { AccountMap } from '../../mappers/AccountMap';
 
-import { IAccountRepository, IGetAccountsByUser, ICreateAccount } from '../IAccountRepository';
+import { IAccountRepository, IGetAccountsByUser, ICreateAccount, IGetAccount } from '../IAccountRepository';
 import { TYPES } from '../../../../types';
 import { PrismaService } from '../../../../prisma-client';
 
@@ -11,6 +11,13 @@ export class PrismaAccountRepository implements IAccountRepository {
   constructor(
     @inject(TYPES.PrismaService) private readonly prisma: PrismaService,
   ) {
+  }
+
+  public async getAccount({ accountId }: IGetAccount): Promise<Account | null> {
+    const account = await this.prisma.account.findOne({ where: { id: accountId } });
+    if (!account) return null;
+
+    return AccountMap.toDomain(account);
   }
 
   public async getAccounts(): Promise<Account[]> {

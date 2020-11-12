@@ -3,3 +3,4 @@ node_modules/
 prisma/.env
 .idea/
 typescript-nexus-prisma-boilerplate.iml
+.dist/

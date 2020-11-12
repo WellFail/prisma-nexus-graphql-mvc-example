@@ -4,8 +4,9 @@
 
 type Account {
   currency: AccountCurrency
-  id: ID
+  id: ID!
   name: String
+  transactions: [Transaction!]
 }
 
 enum AccountCurrency {
@@ -25,6 +26,11 @@ input CreateAccountInput {
   userId: String!
 }
 
+input CreateTransactionInput {
+  accountId: ID!
+  amount: Float!
+}
+
 input CreateUserInput {
   email: String!
   firstName: String
@@ -36,12 +42,14 @@ input CreateUserInput {
 
 type Mutation {
   createAccount(data: CreateAccountInput!): Account
+  createTransaction(data: CreateTransactionInput!): Transaction
   createUser(data: CreateUserInput!): User
   signUp(data: SignUpInput!): AuthPayload
 }
 
 type Query {
   accounts: [Account!]
+  transactions: [Transaction!]
   users: [User!]
 }
 
@@ -50,6 +58,13 @@ input SignUpInput {
   firstName: String
   lastName: String
   password: String!
+}
+
+type Transaction {
+  account: Account
+  accountId: ID!
+  amount: Float
+  id: ID
 }
 
 type User {
