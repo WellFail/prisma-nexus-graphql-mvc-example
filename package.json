@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "generate": "yarn -s generate:prisma && yarn -s generate:nexus",
-    "generate:prisma": "npx prisma2 generate",
+    "generate:prisma": "npx prisma generate",
     "generate:nexus": "GENERATE_NEXUS=true NODE_ENV=development ts-node --transpile-only src/graphql/schema",
-    "migrate": "prisma2 migrate save --experimental --create-db --name='auto' && prisma2 migrate up --experimental --auto-approve",
-    "migrate:up": "prisma2 migrate up --experimental --create-db --auto-approve",
+    "migrate": "prisma migrate save --experimental --create-db --name='auto' && prisma migrate up --experimental --auto-approve",
+    "migrate:up": "prisma migrate up --experimental --create-db --auto-approve",
     "test": "jest"
   },
   "jest": {
@@ -20,7 +20,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@prisma/cli": "^2.1.3",
+    "@prisma/cli": "2.5.1",
     "@types/node": "^13.7.6",
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^3.5.0",
