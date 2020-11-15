@@ -19,6 +19,10 @@ export interface NexusGenInputs {
     name: string; // String!
     userId: string; // String!
   }
+  CreateTransactionInput: { // input type
+    accountId: string; // ID!
+    amount: number; // Float!
+  }
   CreateUserInput: { // input type
     email: string; // String!
     firstName?: string | null; // String
@@ -43,7 +47,7 @@ export interface NexusGenEnums {
 export interface NexusGenRootTypes {
   Account: { // root type
     currency?: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
-    id?: string | null; // ID
+    id: string; // ID!
     name?: string | null; // String
   }
   AuthPayload: { // root type
@@ -52,6 +56,11 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Query: {};
+  Transaction: { // root type
+    accountId: string; // ID!
+    amount?: number | null; // Float
+    id?: string | null; // ID
+  }
   User: { // root type
     email?: string | null; // String
     id?: string | null; // ID
@@ -67,6 +76,7 @@ export interface NexusGenRootTypes {
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
   CreateAccountInput: NexusGenInputs['CreateAccountInput'];
+  CreateTransactionInput: NexusGenInputs['CreateTransactionInput'];
   CreateUserInput: NexusGenInputs['CreateUserInput'];
   SignUpInput: NexusGenInputs['SignUpInput'];
   AccountCurrency: NexusGenEnums['AccountCurrency'];
@@ -76,8 +86,9 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 export interface NexusGenFieldTypes {
   Account: { // field return type
     currency: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
-    id: string | null; // ID
+    id: string; // ID!
     name: string | null; // String
+    transactions: NexusGenRootTypes['Transaction'][] | null; // [Transaction!]
   }
   AuthPayload: { // field return type
     token: string | null; // String
@@ -85,12 +96,20 @@ export interface NexusGenFieldTypes {
   }
   Mutation: { // field return type
     createAccount: NexusGenRootTypes['Account'] | null; // Account
+    createTransaction: NexusGenRootTypes['Transaction'] | null; // Transaction
     createUser: NexusGenRootTypes['User'] | null; // User
     signUp: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Query: { // field return type
     accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
+    transactions: NexusGenRootTypes['Transaction'][] | null; // [Transaction!]
     users: NexusGenRootTypes['User'][] | null; // [User!]
+  }
+  Transaction: { // field return type
+    account: NexusGenRootTypes['Account'] | null; // Account
+    accountId: string; // ID!
+    amount: number | null; // Float
+    id: string | null; // ID
   }
   User: { // field return type
     accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
@@ -106,6 +125,9 @@ export interface NexusGenArgTypes {
     createAccount: { // args
       data: NexusGenInputs['CreateAccountInput']; // CreateAccountInput!
     }
+    createTransaction: { // args
+      data: NexusGenInputs['CreateTransactionInput']; // CreateTransactionInput!
+    }
     createUser: { // args
       data: NexusGenInputs['CreateUserInput']; // CreateUserInput!
     }
@@ -120,9 +142,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Account" | "AuthPayload" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "Account" | "AuthPayload" | "Mutation" | "Query" | "Transaction" | "User";
 
-export type NexusGenInputNames = "CreateAccountInput" | "CreateUserInput" | "SignUpInput";
+export type NexusGenInputNames = "CreateAccountInput" | "CreateTransactionInput" | "CreateUserInput" | "SignUpInput";
 
 export type NexusGenEnumNames = "AccountCurrency" | "UserRole";
 
