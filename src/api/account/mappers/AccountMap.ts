@@ -1,6 +1,6 @@
 import { Account as PersistenceAccount } from '@prisma/client';
 
-import { NexusGenFieldTypes } from '../../../generated/typings';
+import { NexusGenRootTypes } from '../../../generated/typings';
 import { UniqueEntityID } from '../../common/UniqueEntityID';
 
 import { Account } from '../domain/Account';
@@ -32,12 +32,11 @@ export class AccountMap {
     };
   }
 
-  static toNexus(account: Account): NexusGenFieldTypes['Account'] {
+  static toNexus(account: Account): NexusGenRootTypes['Account'] {
     return {
       id: account.id.toValue(),
       currency: account.currency,
       name: account.name,
-      transactions: null,
     };
   }
 }

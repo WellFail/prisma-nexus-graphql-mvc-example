@@ -16,7 +16,7 @@ export class PrismaTransactionRepository implements ITransactionRepository {
   }
 
   async getAccountTransactions({ accountId }: GetAccountTransactions): Promise<Transaction[]> {
-    const transactions = await this.prisma.transaction.findMany({ where: { account: { id: { equals: accountId } } } });
+    const transactions = await this.prisma.transaction.findMany({ where: { accountId } });
 
     return transactions.map((transaction) => TransactionMap.toDomain(transaction));
   }
