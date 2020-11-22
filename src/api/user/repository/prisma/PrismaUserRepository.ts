@@ -38,4 +38,11 @@ export class PrismaUserRepository implements IUserRepository {
 
     return UserMap.toDomain(user);
   }
+
+  public async getUserById(id: string): Promise<User | null> {
+    const user = await this.prisma.user.findOne({ where: { id } });
+    if (!user) return null;
+
+    return UserMap.toDomain(user);
+  }
 }

@@ -9,13 +9,20 @@ import { User } from '../domain/User';
 import { AuthPayload } from '../domain/AuthPayload';
 import { TYPES } from '../../../types';
 
-import { IUserService, CreateUserInterface, SignUpUserInterface } from './IUserService';
+import { IUserService, CreateUserInterface, SignUpUserInterface, GetUser } from './IUserService';
 
 @injectable()
 export class UserService implements IUserService {
   constructor(
     @inject(TYPES.IUserRepository) private readonly userRepository: IUserRepository,
   ) {}
+
+  public async getUser({ id, email }: GetUser): Promise<User | null> {
+    if (id) return this.userRepository.getUserById(id);
+    if (email) return this.userRepository.getUserByEmail(email);
+
+    return null;
+  }
 
   public createUser({ email, password, firstName, lastName, middleName, roles }: CreateUserInterface) {
     const user = User.create({ email, password, firstName, lastName, middleName, roles });

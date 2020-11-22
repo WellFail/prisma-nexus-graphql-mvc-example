@@ -31,6 +31,10 @@ export interface NexusGenInputs {
     password: string; // String!
     roles: NexusGenEnums['UserRole'][]; // [UserRole!]!
   }
+  GetUserArgs: { // input type
+    email?: string | null; // String
+    id?: string | null; // ID
+  }
   SignUpInput: { // input type
     email: string; // String!
     firstName?: string | null; // String
@@ -78,6 +82,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   CreateAccountInput: NexusGenInputs['CreateAccountInput'];
   CreateTransactionInput: NexusGenInputs['CreateTransactionInput'];
   CreateUserInput: NexusGenInputs['CreateUserInput'];
+  GetUserArgs: NexusGenInputs['GetUserArgs'];
   SignUpInput: NexusGenInputs['SignUpInput'];
   AccountCurrency: NexusGenEnums['AccountCurrency'];
   UserRole: NexusGenEnums['UserRole'];
@@ -104,6 +109,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
     transactions: NexusGenRootTypes['Transaction'][] | null; // [Transaction!]
+    user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][] | null; // [User!]
   }
   Transaction: { // field return type
@@ -137,6 +143,11 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['SignUpInput']; // SignUpInput!
     }
   }
+  Query: {
+    user: { // args
+      data: NexusGenInputs['GetUserArgs']; // GetUserArgs!
+    }
+  }
 }
 
 export interface NexusGenAbstractResolveReturnTypes {
@@ -146,7 +157,7 @@ export interface NexusGenInheritedFields {}
 
 export type NexusGenObjectNames = "Account" | "AuthPayload" | "Mutation" | "Query" | "Transaction" | "User";
 
-export type NexusGenInputNames = "CreateAccountInput" | "CreateTransactionInput" | "CreateUserInput" | "SignUpInput";
+export type NexusGenInputNames = "CreateAccountInput" | "CreateTransactionInput" | "CreateUserInput" | "GetUserArgs" | "SignUpInput";
 
 export type NexusGenEnumNames = "AccountCurrency" | "UserRole";
 

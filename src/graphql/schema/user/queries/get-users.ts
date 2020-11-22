@@ -1,7 +1,7 @@
 import { extendType } from '@nexus/schema';
 import { UserMap } from '../../../../api/user/mappers/UserMap';
 
-export const UserQuery = extendType({
+export const UserSQuery = extendType({
   type: 'Query',
   definition: (t) => {
     t.field('users', {

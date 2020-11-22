@@ -6,6 +6,12 @@ export interface IUserService {
   signUpUser(data: SignUpUserInterface): Promise<AuthPayload>;
   createUser(data: CreateUserInterface): Promise<User>;
   getUsers(): Promise<User[]>;
+  getUser(data: GetUser): Promise<User | null>;
+}
+
+export interface GetUser {
+  id?: string | null;
+  email?: string | null;
 }
 
 export interface GetUserBalanceInterface {
