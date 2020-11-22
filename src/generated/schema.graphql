@@ -3,6 +3,7 @@
 
 
 type Account {
+  balance: Float
   currency: AccountCurrency
   id: ID!
   name: String
@@ -69,8 +70,9 @@ type Transaction {
 
 type User {
   accounts: [Account!]
+  balance: Float
   email: String
-  id: ID
+  id: ID!
   name: String
   roles: [UserRole!]
 }

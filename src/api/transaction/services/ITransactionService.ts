@@ -6,6 +6,10 @@ export interface ITransactionService {
   getAccountTransaction(data: GetAccountTransaction): Promise<Transaction[]>
 }
 
+export interface GetAccountTransactionsBalance {
+  accountId: string,
+}
+
 export interface GetAccountTransaction {
   accountId: string,
 }

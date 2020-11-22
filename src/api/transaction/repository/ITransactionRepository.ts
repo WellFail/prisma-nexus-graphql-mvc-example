@@ -6,6 +6,10 @@ export interface ITransactionRepository {
   createTransaction(transaction: ICreateTransaction): Promise<Transaction>;
 }
 
+export interface getTransactionSumByAccountId {
+  accountId: string;
+}
+
 export interface GetAccountTransactions {
   accountId: string;
 }

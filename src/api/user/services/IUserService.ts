@@ -8,6 +8,10 @@ export interface IUserService {
   getUsers(): Promise<User[]>;
 }
 
+export interface GetUserBalanceInterface {
+  userId: string;
+}
+
 export interface CreateUserInterface {
   email: string;
   password: string;

@@ -16,6 +16,13 @@ export const Account = objectType({
         return transactions.map((transaction) => TransactionMap.toNexus(transaction));
       },
     });
+    t.float('balance', {
+      resolve: async ({ id }, _, { accountService }) => {
+        const balance = await accountService.getAccountBalance({ accountId: id });
+
+        return balance;
+      },
+    });
   },
 });
 

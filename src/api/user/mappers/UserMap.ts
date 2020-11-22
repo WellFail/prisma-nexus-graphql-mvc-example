@@ -1,6 +1,6 @@
 import { User as PersistenceUser } from '@prisma/client';
 
-import { NexusGenFieldTypes } from '../../../generated/typings';
+import { NexusGenRootTypes } from '../../../generated/typings';
 import { UniqueEntityID } from '../../common/UniqueEntityID';
 
 import { User } from '../domain/User';
@@ -34,13 +34,12 @@ export class UserMap {
     };
   }
 
-  static toNexus(user: User): NexusGenFieldTypes['User'] {
+  static toNexus(user: User): NexusGenRootTypes['User'] {
     return {
       id: user.id.toValue(),
       email: user.email,
       name: user.getName(),
       roles: user.roles,
-      accounts: null,
     };
   }
 }

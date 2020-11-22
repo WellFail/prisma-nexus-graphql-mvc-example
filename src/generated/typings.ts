@@ -63,7 +63,7 @@ export interface NexusGenRootTypes {
   }
   User: { // root type
     email?: string | null; // String
-    id?: string | null; // ID
+    id: string; // ID!
     name?: string | null; // String
     roles?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
   }
@@ -85,6 +85,7 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Account: { // field return type
+    balance: number | null; // Float
     currency: NexusGenEnums['AccountCurrency'] | null; // AccountCurrency
     id: string; // ID!
     name: string | null; // String
@@ -113,8 +114,9 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     accounts: NexusGenRootTypes['Account'][] | null; // [Account!]
+    balance: number | null; // Float
     email: string | null; // String
-    id: string | null; // ID
+    id: string; // ID!
     name: string | null; // String
     roles: NexusGenEnums['UserRole'][] | null; // [UserRole!]
   }
